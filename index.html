@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Adhkar</title>
+  <title>Tamyeez al Adad</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400i|Raleway:200" rel="stylesheet">
 
@@ -21,7 +21,7 @@
 
     body {
         min-height: 100%;
-        display: table;
+        /* display: table; */
         background: #f2709c;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to bottom, #ff9472, #f2709c);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to bottom, #ff9472, #f2709c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -53,63 +53,7 @@
 	  font-size: 36px;
     }
 
-    .time{
-        font-family: 'Libre Baskerville', serif;
-        font-size: 24px;
-        font-style: italic;
-        font-weight: 200;
-    }
-
-    .grid{
-        display: flex;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-
-    #resultsContainer{
-        margin-top: 30px;
-    }
-    .result_box {
-        border-radius: 7px;
-        text-align: center;
-        width: 500px;
-        margin: 25px 10px;
-        border: 1px solid #ffffff;
-        background: rgba(240,240,255, 0.45);
-        background: rgba(252, 248, 239, 0.1)
-    }
-
-    .time_button{
-        border: 2px solid white;
-        color: white;
-        /* padding: 15px 32px; */
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        vertical-align: middle;
-        line-height: 25px;
-        border-radius: 100%;
-        width: 150px;
-        height: 150px;
-        font-size: 22px;
-        /* background: rgba(226, 207, 213, 0.34); */
-        background: rgba(243, 220, 227, 0.26);
-        cursor: pointer;
-        font-weight: 600;
-        margin-top: 15px;
-    }
-
-    .time_button_other{
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-
-    #custom_time_input{
+    input, #input_number{
         width: 75%;
         border: 1px solid white;
         background: rgba(252, 248, 239, 0.1);
@@ -121,29 +65,66 @@
         text-align: center;
     }
 
+    .input_container{
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
   </style>
 
 </head>
 
 <body>
 
-    <h1>Type a number to convert?</h1>
+    <h1>Type a number to convert it to Arabic</h1>
 
-    <div class="time_button time_button_other" onclick="custom_time()">
-        <input type="text" class="" id="custom_time_input" value="120"></input>
-        <button class="time_button" onclick="custom_time()">Other</button>
+    <div class="input_container">
+        <input type="text" class="" id="input_number" value=""></input>
     </div>
+    
+    <!-- <hr /> -->
+
+    <h3 id="resultsContainer"></h3>
 
 
-    <hr />
-
-    <div id="resultsContainer" class="grid"></div>
-
-
-
+<script src="./numbers_js/numbers.js"></script>
+    
 <script>
 
-request_adhkar();
+function get_input_field(){
+    return document.getElementById("input_number")
+}
+
+const initialValue = 114;
+
+function setInitialValueForInput(initValue){
+    get_input_field().value = initValue
+    convert_number_from_input_and_set_output()
+}
+
+function get_input_number(){
+    number_input = get_input_field()
+
+    var inputNumber = 0
+    if( number_input && number_input.value ){
+        inputNumber = number_input.value
+    }
+
+    return inputNumber;
+}
+
+function convert_number_from_input_and_set_output(){
+    var inputNumber = get_input_number()
+    outputNumber = convertNumberToFuhsa(inputNumber); // this function is imported from numbers_js/numbers.js
+    document.getElementById("resultsContainer").innerHTML = outputNumber;
+}
+
+
+get_input_field().addEventListener("input", convert_number_from_input_and_set_output);
+
+setInitialValueForInput(initialValue)
 
 </script>
 
