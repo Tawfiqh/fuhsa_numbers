@@ -81,7 +81,7 @@
     <h1>Type a number to convert it to Arabic</h1>
 
     <div class="input_container">
-        <input type="text" class="" id="input_number" value=""></input>
+        <input type="text" id="input_number" pattern="\d*"></input>
     </div>
     
     <!-- <hr /> -->
@@ -117,8 +117,8 @@ function get_input_number(){
 
 function convert_number_from_input_and_set_output(){
     var inputNumber = get_input_number()
-    outputNumber = convertNumberToFuhsa(inputNumber); // this function is imported from numbers_js/numbers.js
-    document.getElementById("resultsContainer").innerHTML = outputNumber;
+    result = convertNumberToFuhsa(inputNumber); // this function is imported from numbers_js/numbers.js
+    document.getElementById("resultsContainer").innerHTML = result.numeric_string;
 }
 
 
